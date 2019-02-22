@@ -10,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class WordServiceImpl implements WordService {
 
@@ -25,9 +28,11 @@ public class WordServiceImpl implements WordService {
     this.wordRepository = wordRepository;
   }
 
-  // public List<Word> getWords() {
-  // return wordRepository.findAll();
-  // }
+   public List<Word> getWords() {
+//    List<Word> wordsList = new ArrayList<>();
+    List<Word> words = wordRepository.findAll();
+    return words;
+   }
 
   @Override
   public Word addWord(String word) {

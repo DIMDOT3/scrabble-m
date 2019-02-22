@@ -7,14 +7,11 @@ import javax.persistence.*;
 @Entity
 @Table(name = "players")
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Player {
+public class Player extends AuditModel {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int playerId;
   private String playerName;
-
-  public Player() {
-  }
 
   public int getPlayerId() {
     return playerId;
@@ -29,11 +26,6 @@ public class Player {
   }
 
   public void setPlayerName(String playerName) {
-    this.playerName = playerName;
-  }
-
-  public Player(int playerId, String playerName) {
-    this.playerId = playerId;
     this.playerName = playerName;
   }
 }

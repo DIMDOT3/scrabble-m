@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface WordService {
 
-//  public List<Word> getAllWords();
+  public List<Word> getWords();
 
   public Word addWord(String word);
 

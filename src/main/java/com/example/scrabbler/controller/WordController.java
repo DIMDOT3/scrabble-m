@@ -1,25 +1,32 @@
 package com.example.scrabbler.controller;
 
+import com.example.scrabbler.domains.WordRequestBody;
 import com.example.scrabbler.repositories.models.Word;
 import com.example.scrabbler.services.interfaces.WordService;
 
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("/scrabbler")
+@CrossOrigin
+
 public class WordController {
     private WordService wordService;
 
     @Autowired
     public WordController(WordService wordService) {this.wordService = wordService;}
 
-    @CrossOrigin
-    @RequestMapping("/word")
-    public Word word(@RequestParam(value = "word", defaultValue = "World") String word) {
-        Word newWord = wordService.addWord(word);
+    @GetMapping("/words")
+    public List<Word> getWords() {
+       return wordService.getWords();
+    }
+
+    @PostMapping("/words")
+    public Word word(@RequestBody(required = false) WordRequestBody word) {
+        Word newWord = wordService.addWord(word.getWord());
         return newWord;
     }
 }

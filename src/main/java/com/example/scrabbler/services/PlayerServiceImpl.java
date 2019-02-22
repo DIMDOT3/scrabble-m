@@ -7,6 +7,8 @@ import com.example.scrabbler.services.interfaces.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PlayerServiceImpl implements PlayerService {
 
@@ -17,6 +19,10 @@ public class PlayerServiceImpl implements PlayerService {
         this.playerRepository = playerRepository;
     }
 
+    @Override
+    public List<Player> getPlayers() {
+        return playerRepository.findAll();
+    }
     @Override
     public Player addPlayer(String name) {
         Player newPlayer = new Player();
