@@ -19,18 +19,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 //public class Word extends AuditModel {
 public class Word {
 
-        @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @XmlElement(name="word")
     private String word;
 
-    @XmlElement(name="scrabblescore")
     private int scrabblescore;
-
-//    public Word() {
-//    }
 
     public int getId() {
         return id;
@@ -48,17 +43,11 @@ public class Word {
         this.word = word;
     }
 
-    public int getScore() {
+    public int getScrabblescore() {
         return scrabblescore;
     }
 
-    public void setScore(int scrabblescore) {
+    public void setScrabblescore(int scrabblescore) {
         this.scrabblescore = scrabblescore;
     }
-
-//    public Word(int id, String word, int scrabblescore) {
-//        this.id = id;
-//        this.word = word;
-//        this.scrabblescore = scrabblescore;
-//    }
 }

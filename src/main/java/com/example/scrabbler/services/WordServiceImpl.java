@@ -31,13 +31,11 @@ public class WordServiceImpl implements WordService {
 
   @Override
   public Word addWord(String word) {
-    checkIfWordIsValid(word);
-    Word newWord = new Word();
-//    int score = calculateScore(word);
-//    newWord.setScore(score);
-//    newWord.setWord(word);
-//    wordRepository.save(newWord);
-    return newWord;
+    Word checkedWord = checkIfWordIsValid(word);
+    if(checkedWord.getScrabblescore() > 0) {
+      wordRepository.save(checkedWord);
+    }
+    return checkedWord;
   }
 
   public void deleteWord(int wordId) {
@@ -49,62 +47,17 @@ public class WordServiceImpl implements WordService {
     return word;
   }
 
-  private void checkIfWordIsValid(String word) {
-    String url = String.format("http://www.wordgamedictionary.com/api/v1/references/scrabble/%s?key=API_KEY", word);
-    try {
-      log.info("attempting to call");
-      Word response = restTemplate.getForObject(url, Word.class);
-      log.info("call completed");
-      System.out.println(response);
-    } catch (Exception e) {
-      log.info(e.getMessage());
-    }
-  }
-
-  private int calculateScore(String word) {
-    int score = 0;
-
-    char[] scrabbleWordArray = word.toLowerCase().toCharArray();
-    for (char a : scrabbleWordArray) {
-      score += scoreFor(a);
-
-    }
-    return score;
-  }
-
-  private int scoreFor(char letter) {
-    switch (letter) {
-    case 'd':
-    case 'g':
-      return 2;
-
-    case 'b':
-    case 'c':
-    case 'm':
-    case 'p':
-      return 3;
-
-    case 'f':
-    case 'h':
-    case 'v':
-    case 'w':
-    case 'y':
-      return 4;
-
-    case 'k':
-      return 5;
-
-    case 'j':
-    case 'x':
-      return 8;
-
-    case 'z':
-    case 'q':
-      return 10;
-
-    default:
-      return 1;
-
-    }
+  private Word checkIfWordIsValid(String word) {
+    String url = String.format("http://www.wordgamedictionary.com/api/v1/references/scrabble/%s?key=1.119936904369512e30", word);
+    Word response = restTemplate.getForObject(url, Word.class);
+    return response;
+    //    try {
+//      log.info("attempting to call");
+//      Word response = restTemplate.getForObject(url, Word.class);
+//      log.info("call completed");
+//      System.out.println(response);
+//    } catch (Exception e) {
+//      log.info(e.getMessage());
+//    }
   }
 }
