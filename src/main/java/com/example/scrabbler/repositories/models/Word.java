@@ -3,13 +3,11 @@ package com.example.scrabbler.repositories.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
-
-//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+//import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "words")
@@ -21,19 +19,31 @@ public class Word {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+//    @Column(name = "word_id")
+    private int wordId;
+//    private int id;
 
+//    @Column(name = "word")
     private String word;
 
+//    @Column(name = "score")
     private int scrabblescore;
 
-    public int getId() {
-        return id;
+    @ManyToMany(mappedBy = "projects")
+    public int getWordId() {
+        return wordId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setWordId(int wordId) {
+        this.wordId = wordId;
     }
+//    public int getId() {
+//        return id;
+//    }
+//
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     public String getWord() {
         return word;
