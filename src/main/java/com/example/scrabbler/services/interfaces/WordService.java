@@ -8,7 +8,7 @@ public interface WordService {
 
   public List<Word> getWords();
 
-  public Word addWord(String word);
+  public Word addWord(String word, int playerId);
 
   public void deleteWord(int wordId);
 

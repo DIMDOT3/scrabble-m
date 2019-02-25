@@ -6,6 +6,8 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.HashSet;
+import java.util.Set;
 
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -29,10 +31,24 @@ public class Word {
 //    @Column(name = "score")
     private int scrabblescore;
 
-    @ManyToMany(mappedBy = "projects")
-    public int getWordId() {
-        return wordId;
+    @ManyToMany(mappedBy = "words")
+    private Set<Player> players = new HashSet<>();
+
+    public Word() {}
+
+    public Word(String word) {
+        this.word = word;
     }
+
+    public Word(String word, int scrabblescore) {
+        this.word = word;
+        this.scrabblescore = scrabblescore;
+    }
+
+//    @ManyToMany(mappedBy = "courses")
+//    public int getWordId() {
+//        return wordId;
+//    }
 
     public void setWordId(int wordId) {
         this.wordId = wordId;
@@ -60,4 +76,12 @@ public class Word {
     public void setScrabblescore(int scrabblescore) {
         this.scrabblescore = scrabblescore;
     }
+
+//    public Set<Player> getPlayers() {
+//        return players;
+//    }
+//
+//    public void setPlayers(Set<Player> players) {
+//        this.players = players;
+//    }
 }

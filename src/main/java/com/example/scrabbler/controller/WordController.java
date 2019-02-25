@@ -25,8 +25,10 @@ public class WordController {
     }
 
     @PostMapping("/words")
-    public Word word(@RequestBody(required = false) WordRequestBody word) {
-        Word newWord = wordService.addWord(word.getWord());
+    public Word word(@RequestBody(required = false) WordRequestBody wordRequestBody) {
+        String word = wordRequestBody.getWord();
+        int playerId = wordRequestBody.getPlayerId();
+        Word newWord = wordService.addWord(word, playerId);
         return newWord;
     }
 }

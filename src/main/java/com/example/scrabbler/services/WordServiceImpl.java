@@ -3,6 +3,7 @@ package com.example.scrabbler.services;
 
 import com.example.scrabbler.repositories.WordRepository;
 import com.example.scrabbler.repositories.models.Word;
+import com.example.scrabbler.services.interfaces.PlayerService;
 import com.example.scrabbler.services.interfaces.WordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,13 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class WordServiceImpl implements WordService {
 
   private WordRepository wordRepository;
+  private PlayerService playerService;
 
   private static final Logger log = LoggerFactory.getLogger(Word.class);
 
@@ -24,8 +25,9 @@ public class WordServiceImpl implements WordService {
   RestTemplate restTemplate;
 
   @Autowired
-  public WordServiceImpl(WordRepository wordRepository) {
+  public WordServiceImpl(WordRepository wordRepository, PlayerService playerService) {
     this.wordRepository = wordRepository;
+    this.playerService = playerService;
   }
 
    public List<Word> getWords() {
@@ -35,9 +37,10 @@ public class WordServiceImpl implements WordService {
    }
 
   @Override
-  public Word addWord(String word) {
+  public Word addWord(String word, int playerId) {
     Word checkedWord = checkIfWordIsValid(word);
     if(checkedWord.getScrabblescore() > 0) {
+      playerService.addWord(checkedWord, playerId);
       wordRepository.save(checkedWord);
     }
     return checkedWord;
