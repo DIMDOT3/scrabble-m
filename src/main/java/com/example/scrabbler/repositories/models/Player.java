@@ -17,7 +17,6 @@ public class Player extends AuditModel {
   @ManyToMany(cascade = CascadeType.ALL)
   @JoinTable(name = "player_words", joinColumns = { @JoinColumn(name = "player_id") }, inverseJoinColumns = { @JoinColumn(name = "word_id") })
   private List<Word> words;
-//  private Set<Word> words = new HashSet<Word>(0);
 
   public Player() {}
 

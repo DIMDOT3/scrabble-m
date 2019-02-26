@@ -10,11 +10,5 @@ public interface WordService {
 
   public Word getWord(int id);
 
-  public Word addWord(String word, int playerId);
-
-  public void deleteWord(int wordId);
-
-  public Word updateWord(int wordId);
-
-//  public void checkIfWordIsValid(String word);
+  public Word checkIfWordIsValid(String word);
 }

@@ -3,7 +3,6 @@ package com.example.scrabbler.services;
 
 import com.example.scrabbler.repositories.WordRepository;
 import com.example.scrabbler.repositories.models.Word;
-import com.example.scrabbler.services.interfaces.PlayerService;
 import com.example.scrabbler.services.interfaces.WordService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +16,6 @@ import java.util.List;
 public class WordServiceImpl implements WordService {
 
   private WordRepository wordRepository;
-  private PlayerService playerService;
 
   private static final Logger log = LoggerFactory.getLogger(Word.class);
 
@@ -25,13 +23,11 @@ public class WordServiceImpl implements WordService {
   RestTemplate restTemplate;
 
   @Autowired
-  public WordServiceImpl(WordRepository wordRepository, PlayerService playerService) {
+  public WordServiceImpl(WordRepository wordRepository) {
     this.wordRepository = wordRepository;
-    this.playerService = playerService;
   }
 
    public List<Word> getAllWords() {
-//    List<Word> wordsList = new ArrayList<>();
     List<Word> words = wordRepository.findAll();
     return words;
    }
@@ -41,26 +37,9 @@ public class WordServiceImpl implements WordService {
    }
 
   @Override
-  public Word addWord(String word, int playerId) {
-    Word checkedWord = checkIfWordIsValid(word);
-    if(checkedWord.getScrabblescore() > 0) {
-      playerService.addWord(checkedWord, playerId);
-//      wordRepository.save(checkedWord);
-    }
-    return checkedWord;
-  }
-
-  public void deleteWord(int wordId) {
-    wordRepository.deleteById(wordId);
-  }
-
-  public Word updateWord(int wordId) {
-    Word word = new Word();
-    return word;
-  }
-
-  private Word checkIfWordIsValid(String word) {
-    String url = String.format("http://www.wordgamedictionary.com/api/v1/references/scrabble/%s?key=1.119936904369512e30", word);
+  public Word checkIfWordIsValid(String word) {
+    String API_KEY = "1.119936904369512e30";
+    String url = String.format("http://www.wordgamedictionary.com/api/v1/references/scrabble/%s?key=%s", word, API_KEY);
     Word response = restTemplate.getForObject(url, Word.class);
     return response;
     //    try {

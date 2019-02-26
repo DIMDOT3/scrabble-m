@@ -3,9 +3,8 @@ package com.example.scrabbler.controller;
 import com.example.scrabbler.domains.PlayerRequestBody;
 import com.example.scrabbler.repositories.models.Player;
 import com.example.scrabbler.services.interfaces.PlayerService;
-
-import org.springframework.web.bind.annotation.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,6 +33,13 @@ public class PlayerController {
         return playerService.getPlayer(id);
     }
 
-    //    @GetMapping("/words/{id}")
-////    public List<Word> getPlayerWords
+    @DeleteMapping("/players/{id}")
+    public void deletePlayer(@PathVariable int id) {
+        playerService.deletePlayer(id);
+    }
+
+    @PostMapping("/players/{id}/words")
+    public Player addWordToPlayer(@PathVariable int id, @RequestParam(value="word") String scrabbleWord) {
+        return playerService.addWordToPlayer(id, scrabbleWord);
+    }
 }

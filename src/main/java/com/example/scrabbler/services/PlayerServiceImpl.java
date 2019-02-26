@@ -4,6 +4,7 @@ import com.example.scrabbler.repositories.PlayerRepository;
 import com.example.scrabbler.repositories.models.Player;
 import com.example.scrabbler.repositories.models.Word;
 import com.example.scrabbler.services.interfaces.PlayerService;
+import com.example.scrabbler.services.interfaces.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +13,13 @@ import java.util.List;
 @Service
 public class PlayerServiceImpl implements PlayerService {
 
+    @Autowired
     private PlayerRepository playerRepository;
 
-    @Autowired
-    public PlayerServiceImpl(PlayerRepository playerRepository) {
-        this.playerRepository = playerRepository;
+    private WordService wordService;
+
+    public PlayerServiceImpl(WordService wordService) {
+        this.wordService = wordService;
     }
 
     @Override
@@ -28,6 +31,7 @@ public class PlayerServiceImpl implements PlayerService {
     public List<Player> getPlayers() {
         return playerRepository.findAll();
     }
+
     @Override
     public Player addPlayer(String name) {
         Player newPlayer = new Player();
@@ -36,12 +40,21 @@ public class PlayerServiceImpl implements PlayerService {
         return newPlayer;
     }
 
-    public void addWord(Word word, int playerId) {
-//        Player player = playerRepository.findById(playerId);
-        Player player = (playerRepository.findById(playerId)).get();
-        List<Word> words = player.getWords();
-        words.add(word);
-        player.setWords(words);
-        playerRepository.save(player);
+    @Override
+    public void deletePlayer(int playerId) {
+        playerRepository.deleteById(playerId);
+    }
+
+    @Override
+    public Player addWordToPlayer(int playerId, String word) {
+        Player player = playerRepository.findById(playerId).get();
+        Word newWord = wordService.checkIfWordIsValid(word);
+        if(newWord.getScrabblescore() > 0) {
+            List<Word> words = player.getWords();
+            words.add(newWord);
+            playerRepository.save(player);
+            return player;
+        }
+        return player;
     }
 }

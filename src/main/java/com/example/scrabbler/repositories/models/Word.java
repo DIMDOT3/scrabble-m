@@ -20,14 +20,10 @@ public class Word {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @Column(name = "word_id")
     private int wordId;
-//    private int id;
 
-//    @Column(name = "word")
     private String word;
 
-//    @Column(name = "score")
     private int scrabblescore;
 
     @ManyToMany(mappedBy = "words")
@@ -44,21 +40,9 @@ public class Word {
         this.scrabblescore = scrabblescore;
     }
 
-//    @ManyToMany(mappedBy = "courses")
-//    public int getWordId() {
-//        return wordId;
-//    }
-
     public void setWordId(int wordId) {
         this.wordId = wordId;
     }
-//    public int getId() {
-//        return id;
-//    }
-//
-//    public void setId(int id) {
-//        this.id = id;
-//    }
 
     public String getWord() {
         return word;
@@ -76,11 +60,4 @@ public class Word {
         this.scrabblescore = scrabblescore;
     }
 
-//    public Set<Player> getPlayers() {
-//        return players;
-//    }
-//
-//    public void setPlayers(Set<Player> players) {
-//        this.players = players;
-//    }
 }
