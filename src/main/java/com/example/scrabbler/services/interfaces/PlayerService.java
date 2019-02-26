@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface PlayerService {
 
+    public Player getPlayer(int playerId);
     public List<Player> getPlayers();
     public Player addPlayer(String word);
 //    public Optional<Player> getPlayer(int playerId);

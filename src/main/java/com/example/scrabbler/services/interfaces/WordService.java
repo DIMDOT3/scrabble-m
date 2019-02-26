@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface WordService {
 
-  public List<Word> getWords();
+  public List<Word> getAllWords();
+
+  public Word getWord(int id);
 
   public Word addWord(String word, int playerId);
 

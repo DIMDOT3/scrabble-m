@@ -30,10 +30,14 @@ public class WordServiceImpl implements WordService {
     this.playerService = playerService;
   }
 
-   public List<Word> getWords() {
+   public List<Word> getAllWords() {
 //    List<Word> wordsList = new ArrayList<>();
     List<Word> words = wordRepository.findAll();
     return words;
+   }
+
+   public Word getWord(int id) {
+    return wordRepository.findById(id).get();
    }
 
   @Override
@@ -41,13 +45,13 @@ public class WordServiceImpl implements WordService {
     Word checkedWord = checkIfWordIsValid(word);
     if(checkedWord.getScrabblescore() > 0) {
       playerService.addWord(checkedWord, playerId);
-      wordRepository.save(checkedWord);
+//      wordRepository.save(checkedWord);
     }
     return checkedWord;
   }
 
   public void deleteWord(int wordId) {
-    wordRepository.deleteById(String.valueOf(wordId));
+    wordRepository.deleteById(wordId);
   }
 
   public Word updateWord(int wordId) {

@@ -6,8 +6,7 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.List;
 
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -32,7 +31,7 @@ public class Word {
     private int scrabblescore;
 
     @ManyToMany(mappedBy = "words")
-    private Set<Player> players = new HashSet<>();
+    private List<Player> players;
 
     public Word() {}
 

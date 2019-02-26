@@ -20,12 +20,17 @@ public class WordController {
     public WordController(WordService wordService) {this.wordService = wordService;}
 
     @GetMapping("/words")
-    public List<Word> getWords() {
-       return wordService.getWords();
+    public List<Word> getAllWords() {
+       return wordService.getAllWords();
+    }
+
+    @GetMapping("/words/{id}")
+    public Word getWord(@PathVariable int id) {
+        return wordService.getWord(id);
     }
 
     @PostMapping("/words")
-    public Word word(@RequestBody(required = false) WordRequestBody wordRequestBody) {
+    public Word addWord(@RequestBody(required = false) WordRequestBody wordRequestBody) {
         String word = wordRequestBody.getWord();
         int playerId = wordRequestBody.getPlayerId();
         Word newWord = wordService.addWord(word, playerId);

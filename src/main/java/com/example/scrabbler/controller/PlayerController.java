@@ -24,8 +24,16 @@ public class PlayerController {
     }
 
     @PostMapping("/players")
-    public Player player(@RequestBody(required = false) PlayerRequestBody playerRequestBody) {
+    public Player addPlayer(@RequestBody(required = false) PlayerRequestBody playerRequestBody) {
         Player newPlayer = playerService.addPlayer(playerRequestBody.getName());
         return newPlayer;
     }
+
+    @GetMapping("/players/{id}")
+    public Player getPlayer(@PathVariable int id) {
+        return playerService.getPlayer(id);
+    }
+
+    //    @GetMapping("/words/{id}")
+////    public List<Word> getPlayerWords
 }

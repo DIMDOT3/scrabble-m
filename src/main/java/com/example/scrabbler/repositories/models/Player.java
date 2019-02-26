@@ -25,10 +25,10 @@ public class Player extends AuditModel {
     this.playerName = playerName;
   }
 
-  public Player(String playerName, List<Word> words) {
-    this.playerName = playerName;
-    this.words = words;
-  }
+//  public Player(String playerName, List<Word> words) {
+//    this.playerName = playerName;
+//    this.words = words;
+//  }
 
   public int getPlayerId() {
     return playerId;

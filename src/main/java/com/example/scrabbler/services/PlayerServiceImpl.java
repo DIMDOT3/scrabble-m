@@ -20,6 +20,11 @@ public class PlayerServiceImpl implements PlayerService {
     }
 
     @Override
+    public Player getPlayer(int playerId) {
+        return playerRepository.findById(playerId).get();
+    }
+
+    @Override
     public List<Player> getPlayers() {
         return playerRepository.findAll();
     }
@@ -30,11 +35,6 @@ public class PlayerServiceImpl implements PlayerService {
         playerRepository.save(newPlayer);
         return newPlayer;
     }
-
-//    @Override
-//    public Optional<Player> getPlayer(int playerId) {
-//        return playerRepository.findById(String.valueOf(playerId));
-//    }
 
     public void addWord(Word word, int playerId) {
 //        Player player = playerRepository.findById(playerId);
