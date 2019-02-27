@@ -52,6 +52,7 @@ public class PlayerServiceImpl implements PlayerService {
         if(newWord.getScrabblescore() > 0) {
             List<Word> words = player.getWords();
             words.add(newWord);
+            player.setWords(words);
             playerRepository.save(player);
             return player;
         }

@@ -10,7 +10,7 @@ import java.util.List;
 
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@Entity
+@Entity(name = "Words")
 @Table(name = "words")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @XmlRootElement(name="entry")
@@ -26,8 +26,12 @@ public class Word {
 
     private int scrabblescore;
 
-    @ManyToMany(mappedBy = "words")
-    private List<Player> players;
+//    @ManyToMany(mappedBy = "words")
+//    private List<Player> players;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name="player_id", nullable=false)
+//    private Player player;
+
 
     public Word() {}
 
@@ -39,6 +43,12 @@ public class Word {
         this.word = word;
         this.scrabblescore = scrabblescore;
     }
+
+//    public Word(String word, int scrabblescore, Player player) {
+//        this.word = word;
+//        this.scrabblescore = scrabblescore;
+//        this.player = player;
+//    }
 
     public void setWordId(int wordId) {
         this.wordId = wordId;
