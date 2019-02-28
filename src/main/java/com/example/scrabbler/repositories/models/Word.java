@@ -6,7 +6,6 @@ import javax.persistence.*;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
 
 //import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -35,7 +34,12 @@ public class Word {
 
     public Word() {}
 
-    public Word(String word) {
+    public Word(int wordId) {
+        this.wordId = wordId;
+    }
+
+    public Word(int wordId, String word) {
+        this.wordId = wordId;
         this.word = word;
     }
 
@@ -44,11 +48,9 @@ public class Word {
         this.scrabblescore = scrabblescore;
     }
 
-//    public Word(String word, int scrabblescore, Player player) {
-//        this.word = word;
-//        this.scrabblescore = scrabblescore;
-//        this.player = player;
-//    }
+    public int getWordId() {
+        return wordId;
+    }
 
     public void setWordId(int wordId) {
         this.wordId = wordId;

@@ -51,4 +51,16 @@ public class WordServiceImpl implements WordService {
 //      log.info(e.getMessage());
 //    }
   }
+
+  @Override
+  public Word updateWord(int id, String word) {
+    Word updatedWord = wordRepository.findById(id).get();
+    updatedWord.setWord(word);
+    return wordRepository.save(updatedWord);
+  }
+
+  @Override
+  public void deleteWord(int id) {
+    wordRepository.deleteById(id);
+  }
 }
